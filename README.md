@@ -1,6 +1,6 @@
 # Cours algorithmique
 
-
+Access Jupyter Lite at https://sapristi.github.io/cours_algo/
 
 
 # Built with JupyterLite
