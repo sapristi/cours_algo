@@ -2,6 +2,10 @@
 
 Access Jupyter Lite at https://sapristi.github.io/cours_algo/
 
+# Install locally
+
+- install [pdm](https://pdm-project.org/latest/#installation)
+- run `pdm install`
 
 # Built with JupyterLite
 
