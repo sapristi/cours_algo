@@ -14,6 +14,8 @@ dependencies = [
     "jupyterlab-night",
     "jupyterlab-miami-nights",
     "ipycanvas>=0.9.1",
+    "gelidum>=0.7.0",
+    "matplotlib>=3.8.4",
 ]
 requires-python = "==3.11.*"
 readme = "README.md"
@@ -22,3 +24,6 @@ license = {text = "Creative Commons Attribution Non Commercial Share Alike 4.0 I
 
 [tool.pdm]
 distribution = false
+
+[tool.pdm.scripts]
+_.env = {JUPYTER_CONFIG_DIR="config"}

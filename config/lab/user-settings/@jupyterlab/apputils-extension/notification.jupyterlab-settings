@@ -1,0 +1,10 @@
+{
+    // Notifications
+    // @jupyterlab/apputils-extension:notification
+    // Paramètres des notifications.
+    // *******************************************
+
+    // Récupérer les actualités officielles de Jupyter
+    // Récupérer les actualités depuis le fil de nouvelles Jupyter. Si `true`, une requête à un site web sera envoyée.
+    "fetchNews": "false"
+}
