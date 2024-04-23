@@ -25,5 +25,3 @@ license = {text = "Creative Commons Attribution Non Commercial Share Alike 4.0 I
 [tool.pdm]
 distribution = false
 
-[tool.pdm.scripts]
-_.env = {JUPYTER_CONFIG_DIR="config"}
