@@ -16,6 +16,8 @@ dependencies = [
     "ipycanvas>=0.9.1",
     "gelidum>=0.7.0",
     "matplotlib>=3.8.4",
+    "pydantic<2",
+    "grandalf>=0.8",
 ]
 requires-python = "==3.11.*"
 readme = "README.md"
