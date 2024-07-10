@@ -5,6 +5,8 @@ import argparse
 def remove_solutions(notebook: Path):
     data = json.loads(notebook.read_text())
     for cell in data["cells"]:
+        if not cell["cell_type"] == "code":
+            continue
         source_treated = []
         is_removed = False
         for line in cell["source"]:
@@ -15,6 +17,7 @@ def remove_solutions(notebook: Path):
             if "#END" in line:
                 is_removed = False
         cell["source"] = source_treated
+        cell["outputs"] = []
     notebook.write_text(json.dumps(data))
 
 
