@@ -19,7 +19,7 @@ dependencies = [
     "pydantic<2",
     "grandalf>=0.8",
 ]
-requires-python = "==3.11.*"
+requires-python = ">=3.11"
 readme = "README.md"
 license = {text = "Creative Commons Attribution Non Commercial Share Alike 4.0 International"}
 

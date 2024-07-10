@@ -25,6 +25,9 @@ jobs:
       - name: Build the JupyterLite site
         run: |
           pdm run jupyter lite build --contents content --output-dir dist
+      - name: post-treatment
+        run: |
+          pdm run jupyter lite build --contents content --output-dir dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
