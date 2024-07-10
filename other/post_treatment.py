@@ -19,37 +19,27 @@ def remove_solutions(notebook: Path):
 
 
 
-def insert_clear_button(notebook: Path):
-    html = f"""
-    <button type="button" id="button_for_indexeddb">Clear notebook {notebook}</button>
+def insert_clear_button(notebook: Path, root_dir: Path):
+    notebook_rel = notebook.relative_to(root_dir)
+    html = f"""<button type="button" id="button_for_indexeddb">Clear notebook {notebook_rel}</button>
     <script>
     window.button_for_indexeddb.onclick = function(e) {{
         window.indexedDB.open('JupyterLite Storage').onsuccess = function(e) {{
-            // There are also other tables that I'm not clearing:
-            // "counters", "settings", "local-storage-detect-blob-support"
             let tables = ["checkpoints", "files"];
-
-            let db = e.target.result;
-            let t = db.transaction(tables, "readwrite");
-
+            let t = e.target.result.transaction(tables, "readwrite");
             function clearNotenook(tablename) {{
-                let st = t.objectStore(tablename);
-                st.delete(notebookName).onsuccess = function(e) {{
-                    console.log("Deleted {notebook} state in " + tablename + " (" + e.target.result + ")");
+                t.objectStore(tablename).delete(notebookName).onsuccess = function(e) {{
+                    console.log("Deleted {notebook_rel} state in " + tablename + " (" + e.target.result + ")");
                 }}
             }}
-
             for (let tablename of tables) {{
-                clearTable(tablename);
+                clearNotenook(tablename);
             }}
         }}
     }};
-    </script>
-    """
-    cell_source = f"""
-from IPython.display import display, HTML
-display(HTML(\"\"\"{html}\"\"\"))
-    """
+    </script>"""
+    cell_source = f"""from IPython.display import display, HTML
+display(HTML(\"\"\"{html}\"\"\"))"""
     cell = {
         "cell_type": "code",
         "source": cell_source
@@ -63,11 +53,11 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("dir")
     args = parser.parse_args()
-    target_dir = Path(args.dir)
+    root_dir = Path(args.dir)
 
-    notebooks = target_dir.glob("**/*.ipynb")
+    notebooks = root_dir.glob("**/*.ipynb")
 
     for notebook in notebooks:
         print(f"treating notebook {notebook}")
         remove_solutions(notebook)
-        insert_clear_button(notebook)
+        insert_clear_button(notebook, root_dir)
