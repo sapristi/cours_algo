@@ -28,7 +28,7 @@ def insert_clear_button(notebook: Path, root_dir: Path):
             let tables = ["checkpoints", "files"];
             let t = e.target.result.transaction(tables, "readwrite");
             function clearNotenook(tablename) {{
-                t.objectStore(tablename).delete(notebookName).onsuccess = function(e) {{
+                t.objectStore(tablename).delete('{notebook_rel}').onsuccess = function(e) {{
                     console.log("Deleted {notebook_rel} state in " + tablename + " (" + e.target.result + ")");
                 }}
             }}
