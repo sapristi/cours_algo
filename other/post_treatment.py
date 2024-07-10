@@ -47,8 +47,8 @@ def insert_clear_button(notebook: Path):
     </script>
     """
     cell_source = f"""
-    from IPython.display import display, HTML
-    display(HTML({html}))
+from IPython.display import display, HTML
+display(HTML(\"\"\"{html}\"\"\"))
     """
     cell = {
         "cell_type": "code",
