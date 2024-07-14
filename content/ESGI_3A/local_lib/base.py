@@ -1,7 +1,43 @@
-from pydantic import BaseModel
+import pydantic
 from typing import Union
 
-class List(BaseModel):
+class BaseModel(pydantic.BaseModel):
+    class Config:
+        extra="forbid"
+
+def not_implemented(cls, *args, **kwargs):
+    raise NotImplementedError
+
+class RemoveMethods(type):
+    def __new__(mcls, name, bases, attrs):
+        cls = super().__new__(mcls, name, bases, attrs)
+        builtins_to_deactivate = {"__add__","__radd__", "append", "extend", "insert", "pop", "reverse", "sort", "__contains__", "remove", "__delitem__", "__iter__", "__len__" }
+        for method in builtins_to_deactivate  - attrs.keys():
+            setattr(cls, method, not_implemented)
+        return cls
+
+
+
+class Etagère(list[str], metaclass=RemoveMethods):
+    """Classe pour une étagère: """
+    def __init__(self, capacité: int):
+        super().__init__([None] * capacité)
+        self.capacité = capacité
+        
+    def _repr_html_(self):
+        """Sert à afficher l'objet dans un environnement jupyter"""
+        def row(values):
+            return "".join(f"<td>{value}</td>" for value in values)
+        return f"""
+        <style> table, th, td {{ border: 1px solid black !important; }} </style>
+        <table>
+            <tr><th>indice</th>{row(range(self.capacité))}</tr>
+            <tr><th>valeur</th>{row(self[i] for i in range(self.capacité))}</tr>
+        </table>
+        """
+
+
+class Liste(BaseModel):
     """
     Implémentation d'une liste chaînée en python.
     
@@ -10,7 +46,7 @@ class List(BaseModel):
     Si value n'est pas None, next ne doit pas valoir None.
     """
     value: str | None
-    next: Union["List", None] = None
+    next: Union["Liste", None] = None
 
     def __init__(self, value=None, next=None):
         if value is None:
@@ -20,7 +56,7 @@ class List(BaseModel):
     
         else:
             if next is None:
-                next = EMPTY    
+                next = VIDE    
             super().__init__(value=value, next=next)
 
     def is_empty(self):
@@ -34,7 +70,7 @@ class List(BaseModel):
 
     def __eq__(self, other):
         """Test d'égalité"""
-        if not isinstance(other, List):
+        if not isinstance(other, Liste):
             return False
 
         if self.is_empty() or other.is_empty():
@@ -45,12 +81,12 @@ class List(BaseModel):
 
     def __radd__(self, value):
         """Permet d'utiliser l'opérateur + pour construire une liste"""
-        if isinstance(value, List):
+        if isinstance(value, Liste):
             raise NotImplementedError
-        res = List(value, self)
+        res = Liste(value, self)
         return res
 
-class EmptyList(List):
+class ListeVide(Liste):
     """Classe qui représente une liste vide. Les instances ne peuvent pas être modifiées."""
     def __init__(self):
         super().__init__(value=None, next=None)
@@ -59,4 +95,6 @@ class EmptyList(List):
             raise Exception("Object is frozen")
         super().__setattr__(key, value)
 
-EMPTY = EmptyList()
+ListeVide.update_forward_refs()
+
+VIDE = ListeVide()
