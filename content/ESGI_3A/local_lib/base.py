@@ -98,3 +98,48 @@ class ListeVide(Liste):
 ListeVide.update_forward_refs()
 
 VIDE = ListeVide()
+
+
+class BTree(BaseModel):
+    left: Union["BTree", None] = None
+    right: Union["BTree", None] = None
+    value: str
+
+
+    def _repr_aux(self) -> tuple[int, list[str]]:
+        lines = []
+        if self.left:
+            left_root_index, lines_left = self.left._repr_aux()
+            for i, line in enumerate(lines_left):
+                if i < left_root_index:
+                    lines.append("   " + line)
+                elif i == left_root_index:
+                    lines.append("╭─╴" + line)
+                else:
+                    lines.append("│  " + line)
+            
+        root_index = len(lines)
+        lines.append(self.value)
+        
+        if self.right:
+            right_root_index, lines_right = self.right._repr_aux()
+            for i, line in enumerate(lines_right):
+                if i < right_root_index:
+                    lines.append("│  " + line)
+                elif i == right_root_index:
+                    lines.append("╰─╴" + line)
+                else:
+                    lines.append("   " + line)
+    
+        return root_index, lines
+
+    def __repr__(self):
+        root_index, lines = self._repr_aux()
+        lines_res = []
+        for i, line in enumerate(lines):
+            if i == root_index:
+                lines_res.append("──" + line)
+            else:
+                lines_res.append("  " + line)
+        return "\n".join(lines_res)
+BTree.update_forward_refs()
