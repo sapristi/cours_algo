@@ -12,6 +12,7 @@ def remove_solutions(notebook: Path):
         for line in cell["source"]:
             if "#BEGIN" in line:
                 is_removed = True
+                source_treated.append(line.replace("#BEGIN", "# TODO"))
             if not is_removed:
                 source_treated.append(line)
             if "#END" in line:
