@@ -61,6 +61,8 @@ if __name__ == "__main__":
     notebooks = root_dir.glob("**/*.ipynb")
 
     for notebook in notebooks:
+        if ".ipynb_checkpoints" in notebook.parts:
+            continue
         print(f"treating notebook {notebook}")
         remove_solutions(notebook)
         insert_clear_button(notebook, root_dir)

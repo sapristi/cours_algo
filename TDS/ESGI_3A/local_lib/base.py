@@ -103,7 +103,7 @@ VIDE = ListeVide()
 class BTree(BaseModel):
     left: Union["BTree", None] = None
     right: Union["BTree", None] = None
-    value: str
+    value: int | str
 
 
     def _repr_aux(self) -> tuple[int, list[str]]:
@@ -119,7 +119,7 @@ class BTree(BaseModel):
                     lines.append("│  " + line)
             
         root_index = len(lines)
-        lines.append(self.value)
+        lines.append(str(self.value))
         
         if self.right:
             right_root_index, lines_right = self.right._repr_aux()
