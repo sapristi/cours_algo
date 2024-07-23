@@ -45,7 +45,8 @@ def insert_clear_button(notebook: Path, root_dir: Path):
 display(HTML(\"\"\"{html}\"\"\"))"""
     cell = {
         "cell_type": "code",
-        "source": cell_source
+        "source": cell_source,
+        "metadata": {}
     }
 
     data = json.loads(notebook.read_text())
