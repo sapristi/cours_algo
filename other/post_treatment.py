@@ -40,7 +40,7 @@ def insert_clear_button(notebook: Path, root_dir: Path):
             }}
         }}
     }};
-    </script>""".replace(" ", "").replace("\n", "")
+    </script>""".replace("\n", "")
     cell_source = f"""from IPython.display import display, HTML
 display(HTML(\"\"\"{html}\"\"\"))"""
     cell = {
