@@ -5,7 +5,7 @@
 groups = ["default"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.2"
-content_hash = "sha256:a7f8d710fdc9d9ac87a2a0a01934eb140d8215fe3493513a180d8061c129bf4a"
+content_hash = "sha256:ef15c7f0123acc2c2fbcb01ff3c2929bdc9325e50925149a065e2984cddc818e"
 
 [[package]]
 name = "anyio"
@@ -966,7 +966,7 @@ files = [
 
 [[package]]
 name = "jupyterlite-core"
-version = "0.2.3"
+version = "0.3.0"
 requires_python = ">=3.8"
 summary = ""
 groups = ["default"]
@@ -975,23 +975,23 @@ dependencies = [
     "jupyter-core>=4.7",
 ]
 files = [
-    {file = "jupyterlite_core-0.2.3-py3-none-any.whl", hash = "sha256:a439ce73b84a4c24b1fe60f4ec9fe6b477b4466f49e7bc8d5016f272c28aaa94"},
-    {file = "jupyterlite_core-0.2.3.tar.gz", hash = "sha256:e8733074bda54c811997f5baf60a8c39b712768c2f899d2852a61b12b582a9f8"},
+    {file = "jupyterlite_core-0.3.0-py3-none-any.whl", hash = "sha256:247cc34ae6fedda41b15ce4778997164508b2039bc92480665cadfe955193467"},
+    {file = "jupyterlite_core-0.3.0.tar.gz", hash = "sha256:5a97e74a93d487c0a2ce6a4615cd721a39686cdce9d329c241404e985157f8f9"},
 ]
 
 [[package]]
 name = "jupyterlite-pyodide-kernel"
-version = "0.2.3"
+version = "0.3.2"
 requires_python = ">=3.8"
 summary = "Python kernel for JupyterLite powered by Pyodide"
 groups = ["default"]
 dependencies = [
-    "jupyterlite-core<0.3.0,>=0.2.0",
+    "jupyterlite-core<0.4.0,>=0.3.0",
     "pkginfo",
 ]
 files = [
-    {file = "jupyterlite_pyodide_kernel-0.2.3-py3-none-any.whl", hash = "sha256:32b30d0f5ea5b87470cd36f824589e705c9bdaa8f7072d534aea04ec2c7993dc"},
-    {file = "jupyterlite_pyodide_kernel-0.2.3.tar.gz", hash = "sha256:5fef56d29d61a22b8ef2dcd123ae4c79bd5187547b2728e7f03f236109fa200b"},
+    {file = "jupyterlite_pyodide_kernel-0.3.2-py3-none-any.whl", hash = "sha256:ae600571fa755b6fd7a2633a171de3fe490f2b1264bef32cdd7e8c34c95cd5ff"},
+    {file = "jupyterlite_pyodide_kernel-0.3.2.tar.gz", hash = "sha256:0698f4f6cb6d7346063af0a02f47bf102400be639c8ed86689815b7c2a138a1b"},
 ]
 
 [[package]]
