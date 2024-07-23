@@ -1,4 +1,8 @@
 from IPython.core.display import HTML
+
+# import micropip
+# await micropip.install("matplotlib")
+
 import matplotlib.pyplot as plt
 
 
