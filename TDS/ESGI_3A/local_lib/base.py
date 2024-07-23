@@ -119,7 +119,7 @@ class BTree(BaseModel):
                     lines.append("│  " + line)
             
         root_index = len(lines)
-        lines.append(str(self.value))
+        lines.append(self.value)
         
         if self.right:
             right_root_index, lines_right = self.right._repr_aux()

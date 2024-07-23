@@ -103,7 +103,7 @@ VIDE = ListeVide()
 class BTree(BaseModel):
     left: Union["BTree", None] = None
     right: Union["BTree", None] = None
-    value: str
+    value: int | str
 
 
     def _repr_aux(self) -> tuple[int, list[str]]:
